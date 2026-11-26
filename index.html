@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CookbookPress</title><style>
+:root{--bg:#fbfbfd;--ink:#1d1d1f;--muted:#6e6e73;--line:rgba(0,0,0,.1);--accent:#0071e3}
+@media (prefers-color-scheme:dark){:root{--bg:#000;--ink:#f5f5f7;--muted:#a1a1a6;--line:rgba(255,255,255,.14);--accent:#2997ff}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.6 -apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;-webkit-font-smoothing:antialiased}
+main{max-width:760px;margin:0 auto;padding:40px 24px 80px}
+header.top{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:48px}
+.brand{font-weight:700;font-size:19px;text-decoration:none;color:inherit}
+.langs{display:flex;gap:4px;flex-wrap:wrap}.langs button{border:1px solid var(--line);background:transparent;color:var(--muted);border-radius:999px;padding:5px 12px;font:inherit;font-size:13px;cursor:pointer}
+.langs button.on{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+h1{font-size:clamp(36px,6vw,52px);letter-spacing:-.03em;line-height:1.05;margin:0 0 10px}
+.date{color:var(--muted);margin:0 0 40px}
+h2{font-size:22px;letter-spacing:-.01em;margin:36px 0 8px}
+p{margin:0 0 12px}a{color:var(--accent)}
+.lead{font-size:21px;color:var(--muted);margin-bottom:34px}
+.links a{display:inline-block;margin:0 14px 10px 0;padding:12px 22px;border-radius:999px;background:var(--accent);color:#fff;text-decoration:none}
+.links a.alt{background:transparent;color:var(--accent);border:1px solid var(--line)}
+footer{margin-top:60px;padding-top:20px;border-top:1px solid var(--line);color:var(--muted);font-size:14px}
+[data-lang]{display:none}[data-lang].on{display:block}
+</style></head>
+<body><main><header class="top"><a class="brand" href="./">CookbookPress</a><nav class="langs"><button data-set="es">Español</button><button data-set="en">English</button><button data-set="fr">Français</button><button data-set="it">Italiano</button><button data-set="de">Deutsch</button></nav></header>
+<section data-lang="es"><h1>CookbookPress</h1><p class="lead">Crea recetarios preciosos en tu Mac y conviértelos en libros PDF y páginas web.</p><p class="links"><a href="privacy/">Política de privacidad</a><a class="alt" href="support/">Soporte</a></p></section><section data-lang="en"><h1>CookbookPress</h1><p class="lead">Create beautiful recipe books on your Mac and turn them into PDF books and websites.</p><p class="links"><a href="privacy/">Privacy Policy</a><a class="alt" href="support/">Support</a></p></section><section data-lang="fr"><h1>CookbookPress</h1><p class="lead">Créez de beaux livres de recettes sur votre Mac et transformez-les en livres PDF et en sites web.</p><p class="links"><a href="privacy/">Politique de confidentialité</a><a class="alt" href="support/">Assistance</a></p></section><section data-lang="it"><h1>CookbookPress</h1><p class="lead">Crea splendidi ricettari sul tuo Mac e trasformali in libri PDF e siti web.</p><p class="links"><a href="privacy/">Informativa sulla privacy</a><a class="alt" href="support/">Assistenza</a></p></section><section data-lang="de"><h1>CookbookPress</h1><p class="lead">Erstellen Sie schöne Rezeptsammlungen auf Ihrem Mac und machen Sie daraus PDF-Bücher und Websites.</p><p class="links"><a href="privacy/">Datenschutzerklärung</a><a class="alt" href="support/">Support</a></p></section>
+<footer>© 2026 CookbookPress</footer></main><script>
+(function(){
+  var langs=["es", "en", "fr", "it", "de"], saved=null;
+  try{saved=localStorage.getItem('lang')}catch(e){}
+  var nav=(navigator.languages||[navigator.language||'en']).map(function(l){return l.slice(0,2)});
+  var pick=saved&&langs.indexOf(saved)>=0?saved:(nav.filter(function(l){return langs.indexOf(l)>=0})[0]||'en');
+  function show(l){document.documentElement.lang=l;
+    document.querySelectorAll('[data-lang]').forEach(function(s){s.classList.toggle('on',s.getAttribute('data-lang')===l)});
+    document.querySelectorAll('.langs button').forEach(function(b){b.classList.toggle('on',b.getAttribute('data-set')===l)});
+    try{localStorage.setItem('lang',l)}catch(e){}}
+  document.querySelectorAll('.langs button').forEach(function(b){b.addEventListener('click',function(){show(b.getAttribute('data-set'))})});
+  show(pick);
+})();
+</script></body></html>
